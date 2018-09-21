@@ -37,3 +37,26 @@ I don't know if this step is really necessary but you can add 2 rules (for `pyth
 - Type the following command `conda update conda` or `conda install -c pyviz pyviz` 
 
 If files are downloaded and installed, then it works !
+
+
+# Pip install through a proxy
+## no setting
+
+At each pip install replace the command `pip install <pckg_name>` by `pip -- proxy it000-surf.zone2.proxy.allianz:8080 install <pckg_name>`
+
+## Setting the proxy as windows system variable
+
+in a command prompt as admin type `set HTTP_PROXY=it000-surf.zone2.proxy.allianz:8080` and `set HTTPS_PROXY=it000-surf.zone2.proxy.allianz:8080`
+
+## Managing pip.ini
+
+Find where the pip folder is (usually in `%APPDATA%\pip\` on windows plateform)
+Create a pip.ini file in the pip folder and copy paste those lines:
+
+```
+    [global]
+    trusted-host = pypi.python.org
+                   pypi.org
+                   files.pythonhosted.org
+    proxy = it000-surf.zone2.proxy.allianz:8080
+```
