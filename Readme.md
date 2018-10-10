@@ -60,3 +60,13 @@ Create a pip.ini file in the pip folder and copy paste those lines:
                    files.pythonhosted.org
     proxy = it000-surf.zone2.proxy.allianz:8080
 ```
+
+
+# R
+
+```r
+library(httr)
+set_config(use_proxy(url = "it000-surf.zone2.proxy.allianz:8080"))
+require(devtools)
+install_github("repo_path")
+```
