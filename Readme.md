@@ -1,30 +1,32 @@
+![Avatar](bender_hex_mini.png) 
+
 # Set up the proxy for conda install 
-This short wiki describes how to set up the proxy using a .condarc file. Once set, then you can install a package as usual without specifying the it000-surf.zone2.proxy.allianz:8080 proxy.
+This short wiki describes how to set up the proxy using a .condarc file. Once set, then you can install a package as usual without specifying the [proxy-address]:[port] each time.
 
 This wiki is based on the [conda doc](http://conda.io/docs/user-guide/configuration/use-winxp-with-proxy.html) 
 
 ## Step 1 - Create the .condarc file
-Using the notepad/notepad++, create a .condarc file (sample file available here: [.condarc template](https://conda.io/docs/user-guide/configuration/sample-condarc.html)) and save it as `.conda` or just download the provided one
+Using the notepad/notepad++, create a .condarc file (sample file available here: [.condarc template](https://conda.io/docs/user-guide/configuration/sample-condarc.html)) and save it as `.condarc` or just download the provided one
 
 ## Step 2 - Copy paste the proxy config
 
-You just need to copy-paste those lines in the `.conda` file (use notepad++ to edit the file)
+You just need to copy-paste those lines in the `.condarc` file (use notepad++ to edit the file)
 
 ```
 proxy_servers:
-  http: it000-surf.zone2.proxy.allianz:8080
-  https: it000-surf.zone2.proxy.allianz:8080
+  http: [proxy-address]:[port]
+  https: [proxy-address]:[port]
 
 ssl_verify: False
 ```
 
 ## Step 3 - Put the file in the Anaconda directory
 
-Last, move the `.conda` file in the Anaconda directory (usually `C:\Anaconda`) 
+Last, move the `.condarc` file in the Anaconda directory (usually `C:\Anaconda`) 
 
 ## Step 4 - Add rules to firewall
 
-I don't know if this step is really necessary but you can add 2 rules (for `python.exe` for `pythonw.exe` found in the Anaconda folder)
+Add 2 rules (for `python.exe` for `pythonw.exe` found in the Anaconda folder)
 
  - Go to `Windows Firewall with Advanced Security`
  - Indound rules > new rule > progran > next > browse > `C:\Anaconda\python.exe`
@@ -42,11 +44,11 @@ If files are downloaded and installed, then it works !
 # Pip install through a proxy
 ## no setting
 
-At each pip install replace the command `pip install <pckg_name>` by `pip -- proxy it000-surf.zone2.proxy.allianz:8080 install <pckg_name>`
+At each pip install replace the command `pip install <pckg_name>` by `pip -- [proxy-address]:[port] install <pckg_name>`
 
 ## Setting the proxy as windows system variable
 
-in a command prompt as admin type `set HTTP_PROXY=it000-surf.zone2.proxy.allianz:8080` and `set HTTPS_PROXY=it000-surf.zone2.proxy.allianz:8080`
+in a command prompt as admin type `set HTTP_PROXY=[proxy-address]:[port]` and `set HTTPS_PROXY=[proxy-address]:[port]`
 
 ## Managing pip.ini
 
@@ -58,7 +60,7 @@ Create a pip.ini file in the pip folder and copy paste those lines:
     trusted-host = pypi.python.org
                    pypi.org
                    files.pythonhosted.org
-    proxy = it000-surf.zone2.proxy.allianz:8080
+    proxy = [proxy-address]:[port]
 ```
 
 
@@ -66,7 +68,7 @@ Create a pip.ini file in the pip folder and copy paste those lines:
 
 ```r
 library(httr)
-set_config(use_proxy(url = "it000-surf.zone2.proxy.allianz:8080"))
+set_config(use_proxy(url = "[proxy-address]:[port]"))
 require(devtools)
 install_github("repo_path")
 ```

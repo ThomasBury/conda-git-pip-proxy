@@ -20,7 +20,7 @@ show_channel_urls: True
 # https://conda.io/docs/user-guide/configuration/use-condarc.html
 
 proxy_servers:
-  http: it000-surf.zone2.proxy.allianz:8080
-  https: it000-surf.zone2.proxy.allianz:8080
+  [proxy-address]:[port]
+  [proxy-address]:[port]
 
 ssl_verify: False
