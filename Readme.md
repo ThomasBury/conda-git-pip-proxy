@@ -1,5 +1,4 @@
-![Avatar](bender_hex_mini.png) 
-
+<img src="bender_hex_mini.png" style="position:absolute;top:0px;right:0px;" width="120px" align="right" />
 # Set up the proxy for conda install 
 This short wiki describes how to set up the proxy using a .condarc file. Once set, then you can install a package as usual without specifying the [proxy-address]:[port] each time.
 
