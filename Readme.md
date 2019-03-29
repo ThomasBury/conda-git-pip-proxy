@@ -73,7 +73,7 @@ in a command prompt as admin, type `set HTTP_PROXY=[proxy-address]:[port]` and `
 
 ## Managing pip.ini
 
-Find where the pip folder is (usually in `%APPDATA%\pip\` on windows plateform)
+Find where the pip folder is (usually in `%APPDATA%\pip\` on windows plateform or `%APPDATA%\Roaming\pip\`)
 Create a pip.ini file in the pip folder and copy paste those lines:
 
 ```
