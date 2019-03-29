@@ -21,6 +21,23 @@ proxy_servers:
 ssl_verify: False
 ```
 
+Note that you can go command line all the way using:
+ * `conda config --set proxy_servers.http [proxy-address]:[port]` 
+ * `conda config --set proxy_servers.https [proxy-address]:[port]` 
+ * `conda config --set ssl_verify False`
+ 
+ and check the effect using `conda config --show`
+
+If you need authentification you can use
+
+```
+proxy_servers:
+  http: http://[login]:[pwd]@[proxy-address]:[port]
+  https: https://[login]:[pwd]@[proxy-address]:[port]
+
+ssl_verify: path to corp.crt
+```
+
 ## Step 3 - Put the file in the Anaconda directory
 
 Last, move the `.condarc` file in the Anaconda directory (usually `C:\Anaconda`) 
@@ -41,6 +58,9 @@ Add 2 rules (for `python.exe` for `pythonw.exe` found in the Anaconda folder)
 
 If files are downloaded and installed, then it works !
 
+## Going pirate
+
+You can also disable SSL authentification	`conda config --set ssl_verify False`
 
 # Pip install through a proxy
 ## no setting
