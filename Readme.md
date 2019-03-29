@@ -49,7 +49,7 @@ At each pip install replace the command `pip install <pckg_name>` by `pip -- [pr
 
 ## Setting the proxy as windows system variable
 
-in a command prompt as admin type `set HTTP_PROXY=[proxy-address]:[port]` and `set HTTPS_PROXY=[proxy-address]:[port]`
+in a command prompt as admin, type `set HTTP_PROXY=[proxy-address]:[port]` and `set HTTPS_PROXY=[proxy-address]:[port]`
 
 ## Managing pip.ini
 
@@ -64,6 +64,15 @@ Create a pip.ini file in the pip folder and copy paste those lines:
     proxy = [proxy-address]:[port]
 ```
 
+If you need authentification, then
+```
+    [global]
+    trusted-host = pypi.python.org
+                   pypi.org
+                   files.pythonhosted.org
+    proxy = https://[login]:[pwd]@[proxy-address]:[port]
+    cert  = path to \cacert.pem
+```
 
 # R
 
