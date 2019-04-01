@@ -104,6 +104,23 @@ install_github("repo_path")
 ```
 if it does not work, you can also hard code the environment variable b udoing:
 
-* `file.edit('~/.Renviron')`
+* `file.edit('~/.Renviron')` in the console
 * In the .Renviron file, copy paste  http_proxy=http://[login]:[pwd]@[proxy-address]:[port]
    https_proxy=http://[login]:[pwd]@[proxy-address]:[port]   (the httpS is not supported yet)
+* Restart R and Rstudio
+
+You can test your access by running:
+
+```r
+library(rvest)
+
+# Store web url
+commando_movie <- read_html("https://www.imdb.com/title/tt0088944/?ref_=nm_flmg_act_58")
+
+#Scrape the website for the movie rating
+rating <- commando_movie %>% 
+    html_nodes("strong span") %>%
+    html_text() %>%
+    as.numeric()
+rating # this should be set to >=10 :D
+```
