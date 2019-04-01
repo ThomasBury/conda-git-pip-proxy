@@ -102,3 +102,8 @@ set_config(use_proxy(url = "[proxy-address]:[port]"))
 require(devtools)
 install_github("repo_path")
 ```
+if it does not work, you can also hard code the environment variable b udoing:
+
+* `file.edit('~/.Renviron')`
+* In the .Renviron file, copy paste  http_proxy=http://[login]:[pwd]@[proxy-address]:[port]
+   https_proxy=http://[login]:[pwd]@[proxy-address]:[port]   (the httpS is not supported yet)
