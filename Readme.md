@@ -94,6 +94,10 @@ If you need authentification, then
     cert  = path to \cacert.pem
 ```
 
+after the IT hack:
+
+`pip install --trusted-host files.pythonhosted.org --trusted-host pypi.org --trusted-host pypi.python.org <pkg_name>`
+
 # R
 
 ```r
