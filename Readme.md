@@ -73,18 +73,28 @@ in a command prompt as admin, type `set HTTP_PROXY=[proxy-address]:[port]` and `
 
 ## Managing pip.ini
 
-Find where the pip folder is (usually in `%APPDATA%\pip\` on windows plateform or `%APPDATA%\Roaming\pip\`)
-Create a pip.ini file in the pip folder and copy paste those lines:
+Find where the pip folder is: use the command 
+
+```bash
+(base) C:\WINDOWS\system32>pip config list -v
+```
+the output should be something like:
+
+```bash
+For variant 'global', will try loading 'C:\ProgramData\pip\pip.ini'
+For variant 'user', will try loading 'C:\Users\[login]\pip\pip.ini'
+For variant 'user', will try loading 'C:\Users\[login]\AppData\Roaming\pip\pip.ini'
+```
+You may have to create the pip folder. Copy paste those lines into the pip.ini (create it with notepad++ or notepad)
 
 ```
     [global]
     trusted-host = pypi.python.org
                    pypi.org
                    files.pythonhosted.org
-    proxy = [proxy-address]:[port]
 ```
 
-If you need authentification, then
+If you need authentification (** this should not be necessary if you use fiddler or if IT set up your windows image correctly **), then
 ```
     [global]
     trusted-host = pypi.python.org
@@ -94,7 +104,7 @@ If you need authentification, then
     cert  = path to \cacert.pem
 ```
 
-after the IT hack:
+Or you can specify the trusted host if you don't want to set up a pip config (but not as convenient)
 
 `pip install --trusted-host files.pythonhosted.org --trusted-host pypi.org --trusted-host pypi.python.org <pkg_name>`
 
