@@ -92,6 +92,7 @@ You may have to create the pip folder. Copy paste those lines into the pip.ini (
     trusted-host = pypi.python.org
                    pypi.org
                    files.pythonhosted.org
+    proxy = https://localhost:8888 
 ```
 
 If you need authentification (** this should not be necessary if you use fiddler or if IT set up your windows image correctly **), then
@@ -116,7 +117,7 @@ set_config(use_proxy(url = "[proxy-address]:[port]"))
 require(devtools)
 install_github("repo_path")
 ```
-if it does not work, you can also hard code the environment variable b udoing:
+if it does not work, you can also hard code the environment variable by doing:
 
 * `file.edit('~/.Renviron')` in the console
 * In the .Renviron file, copy paste  http_proxy=http://[login]:[pwd]@[proxy-address]:[port]
