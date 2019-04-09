@@ -71,7 +71,7 @@ At each pip install replace the command `pip install <pckg_name>` by `pip -- [pr
 
 in a command prompt as admin, type `set HTTP_PROXY=[proxy-address]:[port]` and `set HTTPS_PROXY=[proxy-address]:[port]`
 
-## Managing pip.ini
+## Managing pip.ini with Fiddler installed
 
 Find where the pip folder is: use the command 
 
@@ -95,6 +95,11 @@ You may have to create the pip folder. Copy paste those lines into the pip.ini (
     proxy = https://localhost:8888 
 ```
 
+Or you can specify the trusted host if you don't want to set up a pip config (but not as convenient)
+`pip install --trusted-host files.pythonhosted.org --trusted-host pypi.org --trusted-host pypi.python.org <pkg_name>`
+
+## Managing pip.ini without Fiddler installed
+
 If you need authentification (** this should not be necessary if you use fiddler or if IT set up your windows image correctly **), then
 ```
     [global]
@@ -105,24 +110,26 @@ If you need authentification (** this should not be necessary if you use fiddler
     cert  = path to \cacert.pem
 ```
 
-Or you can specify the trusted host if you don't want to set up a pip config (but not as convenient)
-
-`pip install --trusted-host files.pythonhosted.org --trusted-host pypi.org --trusted-host pypi.python.org <pkg_name>`
-
 # R
 
+## Using httr
 ```r
 library(httr)
 set_config(use_proxy(url = "[proxy-address]:[port]"))
 require(devtools)
 install_github("repo_path")
 ```
-if it does not work, you can also hard code the environment variable by doing:
+
+## Editing environment variables in .Renviron
+
+if httr does not work, you can also hard code the environment variable by doing:
 
 * `file.edit('~/.Renviron')` in the console
 * In the .Renviron file, copy paste  http_proxy=http://[login]:[pwd]@[proxy-address]:[port]
    https_proxy=http://[login]:[pwd]@[proxy-address]:[port]   (the httpS is not supported yet)
 * Restart R and Rstudio
+
+## Test your access
 
 You can test your access by running:
 
