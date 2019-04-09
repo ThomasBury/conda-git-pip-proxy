@@ -1,16 +1,17 @@
 <img src="bender_hex_mini.png" style="position:absolute;top:0px;right:0px;" width="120px" align="right" />
 
-# Set up the proxy for conda install 
+# Set up the proxy for conda, pip and R
 
 This short wiki describes how to set up the proxy using a .condarc file. Once set, then you can install a package as usual without specifying the [proxy-address]:[port] each time.
 
 This wiki is based on the [conda doc](http://conda.io/docs/user-guide/configuration/use-winxp-with-proxy.html) 
 
+# 1 - Conda and proxy setting
 ## Step 1 - Create the .condarc file
 Using the notepad/notepad++, create a .condarc file (sample file available here: [.condarc template](https://conda.io/docs/user-guide/configuration/sample-condarc.html)) and save it as `.condarc` or just download the provided one
 
 ## Step 2 - Copy paste the proxy config
-
+### without authentification
 You just need to copy-paste those lines in the `.condarc` file (use notepad++ to edit the file)
 
 ```
@@ -20,6 +21,8 @@ proxy_servers:
 
 ssl_verify: False
 ```
+Using **Fiddler**: the proxy address is then `https://localhost:8888`
+
 
 Note that you can go command line all the way using:
  * `conda config --set proxy_servers.http [proxy-address]:[port]` 
@@ -28,6 +31,7 @@ Note that you can go command line all the way using:
  
  and check the effect using `conda config --show`
 
+### with authentification
 If you need authentification you can use
 
 ```
@@ -62,7 +66,7 @@ If files are downloaded and installed, then it works !
 
 You can also disable SSL authentification	`conda config --set ssl_verify False`
 
-# Pip install through a proxy
+# 2 - Pip install through a proxy
 ## no setting
 
 At each pip install replace the command `pip install <pckg_name>` by `pip -- [proxy-address]:[port] install <pckg_name>`
@@ -110,7 +114,7 @@ If you need authentification (** this should not be necessary if you use fiddler
     cert  = path to \cacert.pem
 ```
 
-# R
+# 3 - R
 
 ## Using httr
 ```r
