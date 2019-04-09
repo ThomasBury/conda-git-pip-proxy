@@ -42,7 +42,7 @@ proxy_servers:
 ssl_verify: path to corp.crt
 ```
 
-## Step 3 - Put the file in the Anaconda directory
+## Step 3 - Put the file in the Anaconda directory (not needed if you used command line)
 
 Last, move the `.condarc` file in the Anaconda directory (usually `C:\Anaconda`) 
 
