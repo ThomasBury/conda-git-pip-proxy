@@ -70,10 +70,7 @@ You can also disable SSL authentification	`conda config --set ssl_verify False`
 ## no setting
 
 At each pip install replace the command `pip install <pckg_name>` by `pip -- [proxy-address]:[port] install <pckg_name>`
-
-## Setting the proxy as windows system variable
-
-in a command prompt as admin, type `set HTTP_PROXY=[proxy-address]:[port]` and `set HTTPS_PROXY=[proxy-address]:[port]`
+If you need to set env variable, in a command prompt as admin, type `set HTTP_PROXY=[proxy-address]:[port]` and `set HTTPS_PROXY=[proxy-address]:[port]`
 
 ## Managing pip.ini with Fiddler installed
 
