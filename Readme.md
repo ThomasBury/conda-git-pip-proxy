@@ -1,177 +1,105 @@
-<img src="bender_hex_mini.png" style="position:absolute;top:0px;right:0px;" width="120px" align="right" />
+![Avatar](bender_hex_mini.png)
 
-# Set up the proxy for conda, pip and R
+# Automation of conda, pip and git set up
 
-This short wiki describes how to set up the proxy using a .condarc file. Once set, then you can install a package as usual without specifying the [proxy-address]:[port] each time.
-
-This wiki is based on the [conda doc](http://conda.io/docs/user-guide/configuration/use-winxp-with-proxy.html) 
-
-# 1 - Conda and proxy setting
-You can perform step 1, 2 and 3 manually or using command lines. For the latter, you don't need to complete step 1 and 3, just use the command lines in step 2.
-
-## Step 1 - Create the .condarc file
-Using the notepad/notepad++, create a .condarc file (sample file available here: [.condarc template](https://conda.io/docs/user-guide/configuration/sample-condarc.html)) and save it as `.condarc` or just download the provided one
-
-## Step 2 - Copy paste the proxy config
-### without authentification
-You just need to copy-paste those lines in the `.condarc` file (use notepad++ to edit the file)
-
-```
-proxy_servers:
-  http: [proxy-address]:[port]
-  https: [proxy-address]:[port]
-
-ssl_verify: False
-```
-Using **Fiddler**: the proxy address is then `https://localhost:8888`
+Working behind a proxy and a firewall can be a frustrating user experience. The goal of this small (minimal) PowerShell/Batch script is to automate the setting of conda, pip and git such that they work fine in your company framework. Note that you can set up only one, two or three of those components, see below.
+Note that the provided solution works fine, will allow you to create python environments, install packages and interact with GitHub (Enterprise or not) seamlessly.
 
 
-**Note that you can go command line all the way using:**
- * `conda config --set proxy_servers.http [proxy-address]:[port]` 
- * `conda config --set proxy_servers.https [proxy-address]:[port]` 
- * `conda config --set ssl_verify False`
- 
- and check it using `conda config --show`
+# 1 - How to use
 
-### with authentification
-If you need authentification you can use
+## 1.1 Command Prompt
 
-```
-proxy_servers:
-  http: http://[login]:[pwd]@[proxy-address]:[port]
-  https: https://[login]:[pwd]@[proxy-address]:[port]
+If you don't have the rights to run powerscript shell, you can use the batch version of the script as below. This assumes that you have a recent Anaconda distribution if you want to configure conda. If not, you can download it from [there](https://www.anaconda.com/products/individual) (scroll down) and install it as admin. For setting up the proxy for GIT and PIP, you don't need Anaconda.
 
-ssl_verify: path to corp.crt
-```
+If you prefer using PowerShell, please see the next section. For setting conda, the best is to use the `Anaconda CMD` as admin.
 
-**Note that you can go command line all the way using:**
- * `conda config --set proxy_servers.http [login]:[pwd]@[proxy-address]:[port]` 
- * `conda config --set proxy_servers.https [login]:[pwd]@[proxy-address]:[port]` 
- * `conda config --set ssl_verify False`
+ - save the `cpg-config.bat` script in a folder of your choice
+ - open an `Command Prompt`, ideally as `admin` (right click --> run as admin). It is equivalent to do it with `Anaconda CMD`, not mandatory though.
+ - navigate to the folder where you saved the script: `cd c:\user\folder_name`
+ - use this command line: `cpg-config.bat all flexible` then enter
+ - Done!
 
-## Step 3 - Put the file in the Anaconda directory (not needed if you used command line)
+**REM:** Options
+ - `cpg-config.bat git flexible` will configure only GIT
+ - `cpg-config.bat conda flexible` will configure only CONDA
+ - `cpg-config.bat pip flexible` will configure only pip
+ - `cpg-config.bat conda-git flexible` will configure CONDA+GIT
+ - `cpg-config.bat conda-pip flexible` will configure CONDA+PIP
+ - `cpg-config.bat git-pip flexible` will configure GIT+PIP
 
-Last, move the `.condarc` file in the Anaconda directory (usually `C:\Anaconda`) 
+ You can replace `flexible` by `strict` if you want a strict channel order for conda (it speeds up conda but will always look for the packages in the defined order).
 
-## Step 4 - See if it works
+## 1.2 Powershell
+This assumes that you have a recent Anaconda distribution if you want to configure conda. If not, you can download it from [there](https://www.anaconda.com/products/individual) (scroll down) and install it as admin. For GIT and PIP, you don't need Anaconda.
 
-- Close all the notebooks tabs and the conda prompts, 
-- Open a new conda/anaconda prompt as Admin (right click, run as Admin) 
-- Type the following command `conda update conda` or `conda install -c pyviz pyviz` 
-- Type: `pip install palettable`
+ - save the `cpg-config.ps1` script in a folder of your choice
+ - open an `Windows powershell` (or an `anaconda powershell` if you have one), ideally as `admin` (right click --> run as admin)
+ - navigate to the folder where you saved the script: `cd c:\user\folder_name`
+ - use this command line: `.\cpg-config.ps1 [proxy_address]` then enter
+ - Done!
 
-If files are downloaded and installed, then it works !
+**Digitally signed error while running a powershell script**
 
-## Optional 1 - Going pirate
+When you run a .ps1 PowerShell script you might get the message saying *XXX.ps1 is not digitally signed. The script will not execute on the system.* In a powershell prompt, ran with admin rights, run the command:
 
-You can also disable SSL authentification	`conda config --set ssl_verify False`. Sometines, the ssl authentification is not working because of depreciated security, proxy and OS. In that case, turn off the ssl verify and 
-
-## Optional 2 - Add rules to firewall
-The following might not be required. Just perform the conda and pip config, check if both conda install and pip install are working. If not try to add 2 rules (for `python.exe` for `pythonw.exe` found in the Anaconda folder)
-
- - Go to `Windows Firewall with Advanced Security`
- - Indound rules > new rule > progran > next > browse > `C:\Anaconda\python.exe`
- - Indound rules > new rule > progran > next > browse > `C:\Anaconda\pythonw.exe`
-
-# 2 - Pip install through a proxy
-
-## no setting
-
-At each pip install replace the command `pip install <pckg_name>` by `pip -- [proxy-address]:[port] install <pckg_name>`
-If you need to set env variable, in a command prompt as admin, type `set HTTP_PROXY=[proxy-address]:[port]` and `set HTTPS_PROXY=[proxy-address]:[port]`
-
-## Managing pip.ini with proxy or Fiddler installed
-
-Find where the pip folder is: use the command 
-
-```bash
-(base) C:\WINDOWS\system32>pip config list -v
-```
-the output should be something like:
-
-```bash
-For variant 'global', will try loading 'C:\ProgramData\pip\pip.ini'
-For variant 'user', will try loading 'C:\Users\[login]\pip\pip.ini'
-For variant 'user', will try loading 'C:\Users\[login]\AppData\Roaming\pip\pip.ini'
-```
-You may have to create the pip folder. Copy paste those lines into the pip.ini (create it with notepad++ or notepad)
-
-```
-    [global]
-    trusted-host = pypi.python.org
-                   pypi.org
-                   files.pythonhosted.org
-    proxy = https://localhost:8888 
+```shell
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 ```
 
-**Instead of doing it manually, you can create and edit the `pip.ini` using the following commands:**
+**Using conda in a Windows PowerShell**
 
-```bash
-pip config set global.proxy http://[proxy-address]:[port]
-pip config set global.trusted-host pypi.python.org
-pip config set global.trusted-host pypi.org
-pip config set global.trusted-host files.pythonhosted.org
+Chances are that the Windows PowerShell will not recognize the command `conda`. If you have anaconda install, this is easy to solve:
+
+ - open an `anaconda powershell`
+ - use the command line `conda init powershell`, it will automatically add conda to path
+ - restart your `windows powershell` which will then able to run conda commands
+
+
+
+**REM:** Options
+
+You can decide wether you want to configure all, conda, pip, git, git-conda, git-pip, conda-pip by using the optional argument
+
+```shell
+.\cpg-config.ps1 'all'
 ```
 
+or only git
 
-Or you can specify the trusted host if you don't want to set up a pip config (but not convenient)
-`pip install --trusted-host files.pythonhosted.org --trusted-host pypi.org --trusted-host pypi.python.org <pkg_name>`
-
-## Managing pip.ini without Fiddler installed
-
-If you need authentification (** this should not be necessary if you use fiddler or if IT set up your windows image correctly **), then
-```
-    [global]
-    trusted-host = pypi.python.org
-                   pypi.org
-                   files.pythonhosted.org
-    proxy = https://[login]:[pwd]@[proxy-address]:[port]
-    cert  = path to \cacert.pem
+```shell
+.\cpg-config.ps1 'git'
 ```
 
-Or via command line:
+or any of the combinations above.
 
-```bash
-pip config set global.proxy https://[login]:[pwd]@[proxy-address]:[port]
-```
+You can also use the optional argument:
+
+ - `.\cpg-config.ps1 'conda' 'strict'`
+
+ for setting the channel priority to strict (default is currently `flexible`). As of version 4.6.0, Conda has a strict channel priority feature. Strict channel priority can dramatically speed up conda operations and also reduce package incompatibility problems. We recommend it as a default. However, it may break old environment files, so we plan to delay making it conda's out-of-the-box default until the next major version bump, conda 5.0
 
 
-# 3 - R
+## 1.3 - Powershell and CMD are not working, what should I do?
 
-## Using httr
+Open a `Anaconda CMD Prompt` and copy-paste the different commands listed [here](setup_conda_pip.md). You can select what to configure
 
-If not working, see next solution
+# 2 - Scope
 
-```r
-library(httr)
-set_config(use_proxy(url = "[proxy-address]:[port]"))
-require(devtools)
-install_github("repo_path")
-```
+ - On the company network (e.g. with elevated rights)
+ - On a company laptop with elevated rights, with VPN ON
 
-## Editing environment variables in .Renviron
+ Rem:
+  - You don't need `fiddler` anymore
+  - On super laptops, you can turn off the VPN. If the VPN is off, you need to: 
+       *  `conda config --remove-key proxy_servers.http` 
+       *  `pip config unset global.proxy`
 
-if httr does not work, you can also hard code the environment variable by doing:
+# 3 - Useful commands
 
-* `file.edit('~/.Renviron')` in the R console
-* In the .Renviron file, copy paste  http_proxy=http://[login]:[pwd]@[proxy-address]:[port]
-   https_proxy=http://[login]:[pwd]@[proxy-address]:[port]   (the http**S** is not supported yet)
-* Restart R and Rstudio
+You'll find [here](setup_conda_pip.md) some useful commands for conda, pip and git
 
-## Test your access
+# 4 - WTF is conda, channels and python environments ?!
 
-You can test your access by running:
-
-```r
-library(rvest)
-
-# Store web url
-commando_movie <- read_html("https://www.imdb.com/title/tt0088944/?ref_=nm_flmg_act_58")
-
-#Scrape the website for the movie rating
-rating <- commando_movie %>% 
-    html_nodes("strong span") %>%
-    html_text() %>%
-    as.numeric()
-rating # this should be set to >=10 :D
-```
+ - The [conda documentation](https://conda.io/projects/conda/en/latest/user-guide/concepts/index.html) is great. If those concepts are new to you, please take a look, it is well explained ^^
+ - [A great introduction](https://www.freecodecamp.org/news/why-you-need-python-environments-and-how-to-manage-them-with-conda-85f155f4353c/) to python environment with conda, with illustrations
