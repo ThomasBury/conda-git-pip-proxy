@@ -17,16 +17,16 @@ If you prefer using PowerShell, please see the next section. For setting conda, 
  - save the `cpg-config.bat` script in a folder of your choice
  - open an `Command Prompt`, ideally as `admin` (right click --> run as admin). It is equivalent to do it with `Anaconda CMD`, not mandatory though.
  - navigate to the folder where you saved the script: `cd c:\user\folder_name`
- - use this command line: `cpg-config.bat all flexible` then enter
+ - use this command line: `cpg-config.bat [proxy_url] all flexible` then enter. Just replace `[proxy_url]` by your proxy url (e.g. https://xyz.proxy.company-name:8080) 
  - Done!
 
 **REM:** Options
- - `cpg-config.bat git flexible` will configure only GIT
- - `cpg-config.bat conda flexible` will configure only CONDA
- - `cpg-config.bat pip flexible` will configure only pip
- - `cpg-config.bat conda-git flexible` will configure CONDA+GIT
- - `cpg-config.bat conda-pip flexible` will configure CONDA+PIP
- - `cpg-config.bat git-pip flexible` will configure GIT+PIP
+ - `cpg-config.bat [proxy_url] git flexible` will configure only GIT
+ - `cpg-config.bat [proxy_url] conda flexible` will configure only CONDA
+ - `cpg-config.bat [proxy_url] pip flexible` will configure only pip
+ - `cpg-config.bat [proxy_url] conda-git flexible` will configure CONDA+GIT
+ - `cpg-config.bat [proxy_url] conda-pip flexible` will configure CONDA+PIP
+ - `cpg-config.bat [proxy_url] git-pip flexible` will configure GIT+PIP
 
  You can replace `flexible` by `strict` if you want a strict channel order for conda (it speeds up conda but will always look for the packages in the defined order).
 
@@ -62,20 +62,20 @@ Chances are that the Windows PowerShell will not recognize the command `conda`. 
 You can decide wether you want to configure all, conda, pip, git, git-conda, git-pip, conda-pip by using the optional argument
 
 ```shell
-.\cpg-config.ps1 'all'
+.\cpg-config.ps1 [proxy_address] 'all'
 ```
 
 or only git
 
 ```shell
-.\cpg-config.ps1 'git'
+.\cpg-config.ps1 [proxy_address] 'git'
 ```
 
 or any of the combinations above.
 
 You can also use the optional argument:
 
- - `.\cpg-config.ps1 'conda' 'strict'`
+ - `.\cpg-config.ps1 [proxy_address] 'conda' 'strict'`
 
  for setting the channel priority to strict (default is currently `flexible`). As of version 4.6.0, Conda has a strict channel priority feature. Strict channel priority can dramatically speed up conda operations and also reduce package incompatibility problems. We recommend it as a default. However, it may break old environment files, so we plan to delay making it conda's out-of-the-box default until the next major version bump, conda 5.0
 
