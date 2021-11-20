@@ -15,7 +15,7 @@ If you don't have the rights to run powerscript shell, you can use the batch ver
 If you prefer using PowerShell, please see the next section. For setting conda, the best is to use the `Anaconda CMD` as admin.
 
  - save the `cpg-config.bat` script in a folder of your choice
- - open an `Command Prompt`, ideally as `admin` (right click --> run as admin). It is equivalent to do it with `Anaconda CMD`, not mandatory though.
+ - open a `Command Prompt`, ideally as `admin` (right click --> run as admin). It is equivalent to do it with `Anaconda CMD`, not mandatory though.
  - navigate to the folder where you saved the script: `cd c:\user\folder_name`
  - use this command line: `cpg-config.bat [proxy_url] all flexible` then enter. Just replace `[proxy_url]` by your proxy url (e.g. https://xyz.proxy.company-name:8080) 
  - Done!
@@ -34,7 +34,7 @@ If you prefer using PowerShell, please see the next section. For setting conda, 
 This assumes that you have a recent Anaconda distribution if you want to configure conda. If not, you can download it from [there](https://www.anaconda.com/products/individual) (scroll down) and install it as admin. For GIT and PIP, you don't need Anaconda.
 
  - save the `cpg-config.ps1` script in a folder of your choice
- - open an `Windows powershell` (or an `anaconda powershell` if you have one), ideally as `admin` (right click --> run as admin)
+ - open a `Windows powershell` (or an `anaconda powershell` if you have one), ideally as `admin` (right click --> run as admin)
  - navigate to the folder where you saved the script: `cd c:\user\folder_name`
  - use this command line: `.\cpg-config.ps1 [proxy_address]` then enter
  - Done!
@@ -51,7 +51,7 @@ Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 
 Chances are that the Windows PowerShell will not recognize the command `conda`. If you have anaconda install, this is easy to solve:
 
- - open an `anaconda powershell`
+ - open a `anaconda powershell`
  - use the command line `conda init powershell`, it will automatically add conda to path
  - restart your `windows powershell` which will then able to run conda commands
 
