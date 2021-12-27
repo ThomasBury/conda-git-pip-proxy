@@ -30,7 +30,7 @@ If($component -eq "all")
     pip config set global.proxy $proxy
             
     Write-Host('set the pip trusted channels')
-    pip config set global.trusted-host files.pythonhosted.org
+    pip config set "global.trusted-host pypi.python.org global.trusted-host pypi.org global.trusted-host files.pythonhosted.org"
 
     Write-Host('set up proxy for GIT')
     git config --global http.proxy $proxy
@@ -46,9 +46,7 @@ If($component -eq "all")
     pip config set global.proxy $proxy
             
     Write-Host('set the pip trusted channels')
-    pip config set global.trusted-host pypi.python.org
-    pip config set global.trusted-host pypi.org
-    pip config set global.trusted-host files.pythonhosted.org
+    pip config set "global.trusted-host pypi.python.org global.trusted-host pypi.org global.trusted-host files.pythonhosted.org"
 
 }elseif($component -eq "conda") 
 { 
@@ -105,7 +103,7 @@ If($component -eq "all")
     pip config set global.proxy $proxy
             
     Write-Host('set the pip trusted channels')
-    pip config set global.trusted-host files.pythonhosted.org
+    pip config set "global.trusted-host pypi.python.org global.trusted-host pypi.org global.trusted-host files.pythonhosted.org"
 
     Write-Host('set up proxy for GIT')
     git config --global http.proxy $proxy
@@ -136,7 +134,7 @@ If($component -eq "all")
     pip config set global.proxy $proxy
             
     Write-Host('set the pip trusted channels')
-    pip config set global.trusted-host files.pythonhosted.org
+    pip config set "global.trusted-host pypi.python.org global.trusted-host pypi.org global.trusted-host files.pythonhosted.org"
 
 }else{
   Write-Output "first argument should be either all, conda, pip, git, git-conda, git-pip, conda-pip"
