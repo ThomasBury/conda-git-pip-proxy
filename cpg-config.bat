@@ -31,7 +31,7 @@ if %component%==all (
     pip config set global.proxy %proxy%
             
     echo Set the pip trusted channels
-    pip config set "global.trusted-host pypi.python.org global.trusted-host pypi.org global.trusted-host files.pythonhosted.org"
+    pip config set global.trusted-host "pypi.python.org global.trusted-host pypi.org global.trusted-host files.pythonhosted.org"
 
     echo Set up proxy for GIT
     git config --global http.proxy %proxy%
@@ -74,7 +74,7 @@ if %component%==pip (
     pip config set global.proxy %proxy%
             
     echo Set the pip trusted channels
-    pip config set "global.trusted-host pypi.python.org global.trusted-host pypi.org global.trusted-host files.pythonhosted.org"
+    pip config set global.trusted-host "pypi.python.org global.trusted-host pypi.org global.trusted-host files.pythonhosted.org"
 
 )
 
@@ -136,7 +136,7 @@ if %component%==conda-pip (
     pip config set global.proxy %proxy%
             
     echo Set the pip trusted channels
-    pip config set "global.trusted-host pypi.python.org global.trusted-host pypi.org global.trusted-host files.pythonhosted.org"
+    pip config set global.trusted-host "pypi.python.org global.trusted-host pypi.org global.trusted-host files.pythonhosted.org"
 )
 
 if %component%==git-pip (   
@@ -145,7 +145,7 @@ if %component%==git-pip (
     pip config set global.proxy %proxy%
             
     echo Set the pip trusted channels
-    pip config set "global.trusted-host pypi.python.org global.trusted-host pypi.org global.trusted-host files.pythonhosted.org"
+    pip config set global.trusted-host "pypi.python.org global.trusted-host pypi.org global.trusted-host files.pythonhosted.org"
 
     echo Set up proxy for GIT
     git config --global http.proxy %proxy%
