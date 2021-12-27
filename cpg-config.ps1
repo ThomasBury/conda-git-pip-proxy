@@ -6,11 +6,11 @@ param ($proxy, $component="all", $priority='flexible')
 If($component -eq "all") 
 { 
     Write-Output "Configuring GIT + CONDA + PIP"
-    Write-Host('change the priority of conda-forge, the lowest priority')
-    conda config --append channels conda-forge
+    Write-Host('change the priority of conda-forge, the highest priority')
+    conda config --prepend channels conda-forge
 
-    Write-Host('change the priority of defaults, the highest priority')
-    conda config --prepend channels defaults
+    Write-Host('change the priority of defaults, the lowest priority')
+    conda config --append channels defaults
 
     Write-Host('prioritize channels, strict to speed up conda and for consistency')
     conda config --set channel_priority $priority
@@ -30,8 +30,6 @@ If($component -eq "all")
     pip config set global.proxy $proxy
             
     Write-Host('set the pip trusted channels')
-    pip config set global.trusted-host pypi.python.org
-    pip config set global.trusted-host pypi.org
     pip config set global.trusted-host files.pythonhosted.org
 
     Write-Host('set up proxy for GIT')
@@ -55,11 +53,11 @@ If($component -eq "all")
 }elseif($component -eq "conda") 
 { 
     Write-Output "Configuring oly CONDA"
-    Write-Host('change the priority of conda-forge, the lowest priority')
-    conda config --append channels conda-forge
+    Write-Host('change the priority of conda-forge, the highest priority')
+    conda config --prepend channels conda-forge
 
-    Write-Host('change the priority of defaults, the highest priority')
-    conda config --prepend channels defaults
+    Write-Host('change the priority of defaults, the lowest priority')
+    conda config --append channels defaults
 
     Write-Host('prioritize channels, strict to speed up conda and for consistency')
     conda config --set channel_priority $priority
@@ -78,11 +76,11 @@ If($component -eq "all")
 }elseif($component -eq "git-conda") 
 { 
     Write-Output "Configuring GIT and CONDA"
-    Write-Host('change the priority of conda-forge, the lowest priority')
-    conda config --append channels conda-forge
+    Write-Host('change the priority of conda-forge, the highest priority')
+    conda config --prepend channels conda-forge
 
-    Write-Host('change the priority of defaults, the highest priority')
-    conda config --prepend channels defaults
+    Write-Host('change the priority of defaults, the lowest priority')
+    conda config --append channels defaults
 
     Write-Host('prioritize channels, strict to speed up conda and for consistency')
     conda config --set channel_priority $priority
@@ -107,8 +105,6 @@ If($component -eq "all")
     pip config set global.proxy $proxy
             
     Write-Host('set the pip trusted channels')
-    pip config set global.trusted-host pypi.python.org
-    pip config set global.trusted-host pypi.org
     pip config set global.trusted-host files.pythonhosted.org
 
     Write-Host('set up proxy for GIT')
@@ -116,11 +112,11 @@ If($component -eq "all")
 }elseif($component -eq "conda-pip") 
 { 
     Write-Output "Configuring CONDA and PIP"
-    Write-Host('change the priority of conda-forge, the lowest priority')
-    conda config --append channels conda-forge
+    Write-Host('change the priority of conda-forge, the highest priority')
+    conda config --prepend channels conda-forge
 
-    Write-Host('change the priority of defaults, the highest priority')
-    conda config --prepend channels defaults
+    Write-Host('change the priority of defaults, the lowest priority')
+    conda config --append channels defaults
 
     Write-Host('prioritize channels, strict to speed up conda and for consistency')
     conda config --set channel_priority $priority
@@ -140,8 +136,6 @@ If($component -eq "all")
     pip config set global.proxy $proxy
             
     Write-Host('set the pip trusted channels')
-    pip config set global.trusted-host pypi.python.org
-    pip config set global.trusted-host pypi.org
     pip config set global.trusted-host files.pythonhosted.org
 
 }else{

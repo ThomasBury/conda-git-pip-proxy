@@ -5,11 +5,11 @@ Set priority=%3
 
 if %component%==all ( 
     echo Configuring GIT + CONDA + PIP
-    echo change the priority of conda-forge, the lowest priority
-    conda config --append channels conda-forge
+    echo change the priority of conda-forge, the highest priority
+    conda config --prepend channels conda-forge
 
-    echo Change the priority of defaults, the highest priority
-    conda config --prepend channels defaults
+    echo Change the priority of defaults, the lowest priority
+    conda config --append channels defaults
 
     echo Prioritize channels, strict to speed up conda and for consistency
     conda config --set channel_priority %priority%
@@ -47,11 +47,11 @@ if %component%==git (
 
 if %component%==conda (
     echo Configuring CONDA
-    echo Change the priority of conda-forge, the lowest priority
-    conda config --append channels conda-forge
+    echo change the priority of conda-forge, the highest priority
+    conda config --prepend channels conda-forge
 
-    echo Change the priority of defaults, the highest priority
-    conda config --prepend channels defaults
+    echo Change the priority of defaults, the lowest priority
+    conda config --append channels defaults
 
     echo Prioritize channels, strict to speed up conda and for consistency
     conda config --set channel_priority %priority%
@@ -76,8 +76,6 @@ if %component%==pip (
     pip config set global.proxy %proxy%
             
     echo Set the pip trusted channels
-    pip config set global.trusted-host pypi.python.org
-    pip config set global.trusted-host pypi.org
     pip config set global.trusted-host files.pythonhosted.org
 
 )
@@ -86,11 +84,11 @@ if %component%==pip (
 
 if %component%==conda-git (
     echo Configuring CONDA + GIT
-    echo change the priority of conda-forge, the lowest priority
-    conda config --append channels conda-forge
+    echo change the priority of conda-forge, the highest priority
+    conda config --prepend channels conda-forge
 
-    echo Change the priority of defaults, the highest priority
-    conda config --prepend channels defaults
+    echo Change the priority of defaults, the lowest priority
+    conda config --append channels defaults
 
     echo Prioritize channels, strict to speed up conda and for consistency
     conda config --set channel_priority %priority%
@@ -140,8 +138,6 @@ if %component%==conda-pip (
     pip config set global.proxy %proxy%
             
     echo Set the pip trusted channels
-    pip config set global.trusted-host pypi.python.org
-    pip config set global.trusted-host pypi.org
     pip config set global.trusted-host files.pythonhosted.org
 )
 
@@ -151,8 +147,6 @@ if %component%==git-pip (
     pip config set global.proxy %proxy%
             
     echo Set the pip trusted channels
-    pip config set global.trusted-host pypi.python.org
-    pip config set global.trusted-host pypi.org
     pip config set global.trusted-host files.pythonhosted.org
 
     echo Set up proxy for GIT
