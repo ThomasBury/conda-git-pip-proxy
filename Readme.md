@@ -2,36 +2,13 @@
 
 # Automation of conda, pip and git set up
 
-Working behind a proxy and a firewall can be a frustrating user experience. The goal of this small (minimal) PowerShell/Batch script is to automate the setting of conda, pip and git such that they work fine in your company framework. Note that you can set up only one, two or three of those components, see below.
-Note that the provided solution works fine, will allow you to create python environments, install packages and interact with GitHub (Enterprise or not) seamlessly.
+Dealing with a proxy and a firewall can be an arduous task for users. The objective of this concise PowerShell script is to simplify the process of configuring conda, pip, and git to work effectively within your company's framework. It's worth noting that you have the option of selecting one, two, or all three components as needed, as outlined below. Once configured, the solution provided will allow you to effortlessly create python environments, install packages, and interact with GitHub (Enterprise or otherwise).
 
 
 # 1 - How to use
 
-## 1.1 Command Prompt
-
-If you don't have the rights to run powerscript shell, you can use the batch version of the script as below. This assumes that you have a recent Anaconda distribution if you want to configure conda. If not, you can download it from [there](https://www.anaconda.com/products/individual) (scroll down) and install it as admin. For setting up the proxy for GIT and PIP, you don't need Anaconda.
-
-If you prefer using PowerShell, please see the next section. For setting conda, the best is to use the `Anaconda CMD` as admin.
-
- - save the `cpg-config.bat` script in a folder of your choice
- - open a `Command Prompt`, ideally as `admin` (right click --> run as admin). It is equivalent to do it with `Anaconda CMD`, not mandatory though.
- - navigate to the folder where you saved the script: `cd c:\user\folder_name`
- - use this command line: `cpg-config.bat [proxy_url] all flexible` then enter. Just replace `[proxy_url]` by your proxy url (e.g. https://xyz.proxy.company-name:8080) 
- - Done!
-
-**REM:** Options
- - `cpg-config.bat [proxy_url] git flexible` will configure only GIT
- - `cpg-config.bat [proxy_url] conda flexible` will configure only CONDA
- - `cpg-config.bat [proxy_url] pip flexible` will configure only pip
- - `cpg-config.bat [proxy_url] conda-git flexible` will configure CONDA+GIT
- - `cpg-config.bat [proxy_url] conda-pip flexible` will configure CONDA+PIP
- - `cpg-config.bat [proxy_url] git-pip flexible` will configure GIT+PIP
-
- You can replace `flexible` by `strict` if you want a strict channel order for conda (it speeds up conda but will always look for the packages in the defined order).
-
-## 1.2 Powershell
-This assumes that you have a recent Anaconda distribution if you want to configure conda. If not, you can download it from [there](https://www.anaconda.com/products/individual) (scroll down) and install it as admin. For GIT and PIP, you don't need Anaconda.
+## 1.1 Powershell
+This assumes that you have a recent Anaconda/Miniconda/Mambaforge distribution if you want to configure conda. If not, you can download it from [there](https://www.anaconda.com/products/individual) (scroll down) and install it as admin. For GIT and PIP, you don't need Anaconda.
 
  - save the `cpg-config.ps1` script in a folder of your choice
  - open a `Windows powershell` (or an `anaconda powershell` if you have one), ideally as `admin` (right click --> run as admin)
@@ -41,7 +18,7 @@ This assumes that you have a recent Anaconda distribution if you want to configu
 
 **Digitally signed error while running a powershell script**
 
-When you run a .ps1 PowerShell script you might get the message saying *XXX.ps1 is not digitally signed. The script will not execute on the system.* In a powershell prompt, ran with admin rights, run the command:
+When you run a .ps1 PowerShell script you might get the message saying *XXX.ps1 is not digitally signed. The script will not execute on the system.* In a powershell prompt, run the command (you might need admin rights):
 
 ```shell
 Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
